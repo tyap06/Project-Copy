@@ -21,3 +21,10 @@ Users can have all of their recipes stored in this app for easy access.
 - I am interested in this project because I love to cook and try out new recipes. A recipe manager application will be 
   very useful for me to have all recipes stored in one place and easily accessible.
   
+**User Stories**
+
+- As a user, I want to be able to add recipes to my recipe collection.
+- As a user, I want to be able to view the titles of the recipes in my collection.
+- As a user, I want to be able to select a recipe and view it in detail.
+- As a user, I want to be able to select a recipe and rate it on a scale of one to five stars. 
+  
