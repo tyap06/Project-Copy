@@ -6,10 +6,10 @@ import java.util.ArrayList;
 public class Recipe {
     private String title;
     private int servingSize;
-    private ArrayList<Ingredient> ingredients;
+    private ArrayList<String> ingredients;
     private int prepTime;
     private int cookTime;
-    private ArrayList<Direction> directions;
+    private ArrayList<String> directions;
     private int rating;
 
     // EFFECTS: recipe has a title, serving size, ingredients, prep time, cook time,
@@ -45,8 +45,15 @@ public class Recipe {
         return cookTime;
     }
 
+    // REQUIRES: rating must be <= 5
     // EFFECTS: returns rating
     public int getRating() {
         return rating;
+    }
+
+    // REQUIRES: rating must be <= 5
+    // EFFECTS: give a rating to a recipe
+    public void giveRating(int r) {
+        rating = r;
     }
 }
