@@ -1,21 +1,22 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // Represents a recipe having a title, serving size, ingredients, prep time, cook time, directions, and rating
 public class Recipe {
     private String title;
     private int servingSize;
-    private ArrayList<String> ingredients;
-    private int prepTime;
-    private int cookTime;
-    private ArrayList<String> directions;
+    private List<String> ingredients;
+    private int prepTime;                  // time in minutes
+    private int cookTime;                  // time in minutes
+    private List<String> directions;
     private int rating;
 
     // EFFECTS: recipe has a title, serving size, ingredients, prep time, cook time,
     // directions, and a default rating of 0
-    public Recipe(String title, int servingSize, ArrayList<Ingredient> ingredients,
-                  int prepTime, int cookTime, ArrayList<Direction> directions, int rating) {
+    public Recipe(String title, int servingSize, List<String> ingredients,
+                  int prepTime, int cookTime, List<String> directions, int rating) {
         this.title = title;
         this.servingSize = servingSize;
         this.ingredients = ingredients;
@@ -56,4 +57,5 @@ public class Recipe {
     public void giveRating(int r) {
         rating = r;
     }
+
 }
