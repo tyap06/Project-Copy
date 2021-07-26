@@ -43,6 +43,8 @@ public class RecipeManagerApp {
     private void processCommand(String command) {
         if (command.equals("v")) {
             doViewRecipes();
+        } else if (command.equals("s")) {
+            doSelectRecipe();
         } else if (command.equals("a")) {
             doAddRecipe();
         } else {
@@ -72,6 +74,7 @@ public class RecipeManagerApp {
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\tv -> View recipes");
+        System.out.println("\ts -> Select recipe");
         System.out.println("\ta -> Add recipe");
         System.out.println("\tq -> quit");
     }
@@ -83,6 +86,15 @@ public class RecipeManagerApp {
     }
 
     // MODIFIES: this
+    // EFFECTS: allows user to select a recipe from the recipe collection
+    private void doSelectRecipe() {
+        System.out.println("Recipes:" + recipes.viewTitles());
+        System.out.println("\nEnter a recipe title from the recipe collection above:");
+        String title = input.next();
+        System.out.println(recipes.findRecipe(title));
+    }
+
+    // MODIFIES: this
     // EFFECTS: enables user to add recipe
     private void doAddRecipe() {
         System.out.println("\nCreating new recipe");
@@ -91,19 +103,20 @@ public class RecipeManagerApp {
         System.out.println("Enter serving size:");
         int servings = input.nextInt();
         System.out.println("Enter ingredients with measurements:");
-        System.out.println("Type 'done' when ingredient list is completed");
+        System.out.println("Type 'done' when ingredient list is complete");
         ArrayList<String> ingredients = addIngredients();
         System.out.println("Enter prep time in minutes:");
         int prep = input.nextInt();
         System.out.println("Enter cook time in minutes:");
         int cook = input.nextInt();
         System.out.println("Enter directions:");
-        System.out.println("Type 'done' when the list is completed");
+        System.out.println("Type 'done' when the list is complete");
         ArrayList<String> directions = addDirections();
         System.out.println("Enter rating:");
         int rating = input.nextInt();
         Recipe r = new Recipe(title, servings, ingredients, prep, cook, directions, rating);
         recipes.addRecipe(r);
+        System.out.println(r);
     }
 
     // EFFECTS; prompts user to add a list of ingredients
