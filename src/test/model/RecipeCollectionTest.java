@@ -77,8 +77,8 @@ public class RecipeCollectionTest {
 
     @Test
     void testViewTitles() {
-        List<String> expected = Arrays.asList("Spaghetti Sauce with Ground Beef",
-                "Five-Ingredient Red Curry Chicken");
+        ArrayList<String> expected = new ArrayList<String>(Arrays.asList("Spaghetti Sauce with Ground Beef",
+                "Five-Ingredient Red Curry Chicken"));
         rc2.addRecipe(r2);
         rc2.addRecipe(r3);
         assertEquals(expected, rc2.viewTitles());

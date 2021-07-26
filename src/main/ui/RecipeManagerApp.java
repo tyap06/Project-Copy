@@ -87,8 +87,7 @@ public class RecipeManagerApp {
     private void doAddRecipe() {
         System.out.println("\nCreating new recipe");
         System.out.println("\nEnter new recipe title:");
-        String title = input.nextLine();
-        input.nextLine();
+        String title = input.next();
         System.out.println("Enter serving size:");
         int servings = input.nextInt();
         System.out.println("Enter ingredients with measurements:");
