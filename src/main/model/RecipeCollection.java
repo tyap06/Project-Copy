@@ -33,7 +33,7 @@ public class RecipeCollection {
 
     // REQUIRES: Recipes is not empty
     // EFFECTS: Takes a recipe collection and returns a list of recipe titles in the collection
-    public List<String> viewTitles() {
+    public ArrayList<String> viewTitles() {
         ArrayList<String> titles = new ArrayList<String>();
         for (int i = 0; i <= (recipes.size() - 1); i++) {
             titles.add((recipes.get(i).getTitle()));
