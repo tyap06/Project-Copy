@@ -36,6 +36,11 @@ public class Recipe {
         return servingSize;
     }
 
+    // EFFECTS: returns ingredient list
+    public ArrayList<String> getIngredients() {
+        return ingredients;
+    }
+
     // EFFECTS: returns prep time
     public int getPrepTime() {
         return prepTime;
@@ -44,6 +49,11 @@ public class Recipe {
     // EFFECTS: returns cook time
     public int getCookTime() {
         return cookTime;
+    }
+
+    // EFFECTS: returns directions
+    public ArrayList<String> getDirections() {
+        return directions;
     }
 
     // REQUIRES: rating must be <= 5

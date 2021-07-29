@@ -17,7 +17,7 @@ public class RecipeCollection {
         if (recipes.contains(r)) {
             return false;
         }
-        recipes.addLast(r);
+        recipes.add(r);
         return true;
     }
 
@@ -45,7 +45,7 @@ public class RecipeCollection {
     //          If there is no recipe with that title, returns empty recipe
     public Recipe findRecipe(String title) {
         for (Recipe r : recipes) {
-            if (r.getTitle() == title) {
+            if (r.getTitle().equals(title)) {
                 return r;
             }
         }

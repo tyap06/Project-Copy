@@ -89,9 +89,9 @@ public class RecipeManagerApp {
     // EFFECTS: allows user to select a recipe from the recipe collection
     private void doSelectRecipe() {
         System.out.println("Recipes:" + recipes.viewTitles());
-        System.out.println("\nEnter a recipe title from the recipe collection above:");
+        System.out.println("\nEnter the title of the recipe in the recipe collection above:");
         String title = input.next();
-        System.out.println(recipes.findRecipe(title));
+        printRecipe(recipes.findRecipe(title));
     }
 
     // MODIFIES: this
@@ -116,7 +116,7 @@ public class RecipeManagerApp {
         int rating = input.nextInt();
         Recipe r = new Recipe(title, servings, ingredients, prep, cook, directions, rating);
         recipes.addRecipe(r);
-        System.out.println(r);
+        printRecipe(r);
     }
 
     // EFFECTS; prompts user to add a list of ingredients
@@ -150,5 +150,23 @@ public class RecipeManagerApp {
             }
         }
         return directions;
+    }
+
+    // EFFECTS: Prints the given recipe
+    private void printRecipe(Recipe r) {
+        String title = r.getTitle();
+        int serving = r.getServingSize();
+        ArrayList<String> ingredients = r.getIngredients();
+        int prepTime = r.getPrepTime();
+        int cookTime = r.getCookTime();
+        ArrayList<String> directions = r.getDirections();
+        int rating = r.getRating();
+        System.out.println("\nRecipe: " + title);
+        System.out.println("\nServing size: " + serving);
+        System.out.println("Ingredients: " + ingredients);
+        System.out.println("Prep time: " + prepTime);
+        System.out.println("Cook time: " + cookTime);
+        System.out.println("Directions: " + directions);
+        System.out.println("Rating: " + rating);
     }
 }
