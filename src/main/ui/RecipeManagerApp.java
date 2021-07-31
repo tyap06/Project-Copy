@@ -162,7 +162,7 @@ public class RecipeManagerApp {
         ArrayList<String> directions = r.getDirections();
         int rating = r.getRating();
         System.out.println("\nRecipe: " + title);
-        System.out.println("\nServing size: " + serving);
+        System.out.println("Serving size: " + serving);
         System.out.println("Ingredients: " + ingredients);
         System.out.println("Prep time: " + prepTime);
         System.out.println("Cook time: " + cookTime);
