@@ -1,0 +1,25 @@
+{
+  "recipes": [
+    {
+      "title": "Omelet",
+      "serving size": 1,
+      "ingredients": ["2 large eggs", "Salt", "Pepper"],
+      "prep time": 5,
+      "cook time": 10,
+      "directions": ["Crack eggs into bowl", "Season and whisk eggs", "Cook eggs in a pan", "Serve and enjoy"],
+      "rating": 4
+    },
+    {
+      "title": "Grilled Cheese",
+      "serving size": 1,
+      "ingredients": ["2 slices of bread", "Cheese", "Butter"],
+      "prep time": 5,
+      "cook time": 5,
+      "directions": ["Spread butter one side of each bread slice", "In a pan, add the slices of bread",
+        "Add cheese on both slices of bread", "Flip one bread slice on top of the other slice",
+        "Cook until cheese is melted", "Serve and enjoy"],
+      "rating": 3
+    }
+  ],
+  "name": "My work room"
+}

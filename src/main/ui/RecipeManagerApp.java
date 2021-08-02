@@ -2,17 +2,29 @@ package ui;
 
 import model.Recipe;
 import model.RecipeCollection;
+import model.WorkRoom;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 // Recipe manager application - code based on ui in Teller app
 public class RecipeManagerApp {
+    private static final String JSON_STORE = "./data/workroom.json";
     private RecipeCollection recipes;
     private Recipe recipe;
     private Scanner input;
+    private WorkRoom workRoom;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs recipe manager application
-    public RecipeManagerApp() {
+    public RecipeManagerApp() throws FileNotFoundException {
+        workRoom = new WorkRoom("Timothy's workroom");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runRecipeManager();
     }
 
@@ -43,10 +55,14 @@ public class RecipeManagerApp {
     private void processCommand(String command) {
         if (command.equals("v")) {
             doViewRecipes();
-        } else if (command.equals("s")) {
+        } else if (command.equals("r")) {
             doSelectRecipe();
         } else if (command.equals("a")) {
             doAddRecipe();
+        } else if (command.equals("s")) {
+            doSaveWorkRoom();
+        } else if (command.equals("l")) {
+            doLoadWorkRoom();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -74,8 +90,10 @@ public class RecipeManagerApp {
     private void displayMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\tv -> View recipes");
-        System.out.println("\ts -> Select recipe");
+        System.out.println("\tr -> Select recipe");
         System.out.println("\ta -> Add recipe");
+        System.out.println("\ts -> Save recipe work room to file");
+        System.out.println("\tl -> Load recipe work room to file");
         System.out.println("\tq -> quit");
     }
 
@@ -168,5 +186,28 @@ public class RecipeManagerApp {
         System.out.println("Cook time: " + cookTime);
         System.out.println("Directions: " + directions);
         System.out.println("Rating: " + rating);
+    }
+
+    // EFFECTS: saves the recipe workroom to file
+    private void doSaveWorkRoom() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(workRoom);
+            jsonWriter.close();
+            System.out.println("Saved " + workRoom.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void doLoadWorkRoom() {
+        try {
+            workRoom = jsonReader.read();
+            System.out.println("Loaded " + workRoom.getName() + " from" + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a recipe having a title, serving size, ingredients, prep time, cook time, directions, and rating
-public class Recipe {
+public class Recipe implements Writable {
     private String title;
     private int servingSize;
     private ArrayList<String> ingredients;
@@ -66,6 +69,19 @@ public class Recipe {
     // EFFECTS: give a rating to a recipe
     public void giveRating(int r) {
         rating = r;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("serving size", servingSize);
+        json.put("ingredients", ingredients);
+        json.put("prep time", prepTime);
+        json.put("cook time", cookTime);
+        json.put("directions", directions);
+        json.put("rating", rating);
+        return json;
     }
 
 }
