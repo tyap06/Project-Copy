@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-// Recipe manager application - code based on ui in Teller app
+// Recipe manager application - code based on ui in Teller app, and JsonSerializationDemo
 public class RecipeManagerApp {
     private static final String JSON_STORE = "./data/workroom.json";
     private RecipeCollection recipes;
@@ -22,9 +22,6 @@ public class RecipeManagerApp {
 
     // EFFECTS: runs recipe manager application
     public RecipeManagerApp() throws FileNotFoundException {
-        workRoom = new WorkRoom("Timothy's workroom");
-        jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
         runRecipeManager();
     }
 
@@ -84,6 +81,9 @@ public class RecipeManagerApp {
         recipes = new RecipeCollection();
         recipe = new Recipe("Spaghetti Sauce with Ground Beef", 8, ri, 15, 70, rd, 0);
         input = new Scanner(System.in);
+        workRoom = new WorkRoom("Timothy's workroom");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays menu of options to user
@@ -100,20 +100,22 @@ public class RecipeManagerApp {
     // MODIFIES: this
     // EFFECTS: Shows a list of recipe titles stored in recipe
     private void doViewRecipes() {
-        System.out.println("Recipes:" + recipes.viewTitles());
+        List<Recipe> recipeList = workRoom.getRecipes();
+        System.out.println("Recipes:" + workRoom.viewTitles(recipeList));
     }
 
     // MODIFIES: this
     // EFFECTS: allows user to select a recipe from the recipe collection
     private void doSelectRecipe() {
-        System.out.println("Recipes:" + recipes.viewTitles());
+        List<Recipe> recipeList = workRoom.getRecipes();
+        System.out.println("Recipes:" + workRoom.viewTitles(recipeList));
         System.out.println("\nEnter the title of the recipe in the recipe collection above:");
         String title = input.next();
-        printRecipe(recipes.findRecipe(title));
+        printRecipe(workRoom.findRecipe(title));
     }
 
     // MODIFIES: this
-    // EFFECTS: enables user to add recipe
+    // EFFECTS: enables user to add recipe and adds it to the workroom
     private void doAddRecipe() {
         System.out.println("\nCreating new recipe");
         System.out.println("\nEnter new recipe title:");
@@ -134,6 +136,7 @@ public class RecipeManagerApp {
         int rating = input.nextInt();
         Recipe r = new Recipe(title, servings, ingredients, prep, cook, directions, rating);
         recipes.addRecipe(r);
+        workRoom.addRecipe(r);
         printRecipe(r);
     }
 
@@ -204,8 +207,9 @@ public class RecipeManagerApp {
     // EFFECTS: loads workroom from file
     private void doLoadWorkRoom() {
         try {
-            workRoom = jsonReader.read();
-            System.out.println("Loaded " + workRoom.getName() + " from" + JSON_STORE);
+            JsonReader reader = new JsonReader(JSON_STORE);
+            workRoom = reader.read();
+            System.out.println("Loaded " + workRoom.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

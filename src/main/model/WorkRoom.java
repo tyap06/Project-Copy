@@ -32,8 +32,29 @@ public class WorkRoom implements Writable {
     // MODIFIES: this
     // EFFECTS: returns an unmodifiable list of recipes in this workroom
     public List<Recipe> getRecipes() {
-        return  Collections.unmodifiableList(recipes);
+        return Collections.unmodifiableList(recipes);
     }
+
+    // EFFECTS: returns a list of all recipe titles in this workroom
+    public ArrayList<String> viewTitles(List<Recipe> recipes) {
+        ArrayList<String> titles = new ArrayList<String>();
+        for (int i = 0; i <= (recipes.size() - 1); i++) {
+            titles.add((recipes.get(i).getTitle()));
+        }
+        return titles;
+    }
+
+    // EFFECTS: takes a recipe title and returns the recipe with that title.
+    //          If there is no recipe with that title, returns empty recipe
+    public Recipe findRecipe(String title) {
+        for (Recipe r : recipes) {
+            if (r.getTitle().equals(title)) {
+                return r;
+            }
+        }
+        return null;
+    }
+
 
     // EFFECTS: returns a number of recipes in this workroom
     public int numRecipes() {
