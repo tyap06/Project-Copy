@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +57,7 @@ class RecipeTest {
     }
 
     @Test
-    void testGetDirections(){
+    void testGetDirections() {
         ArrayList<String> expected = new ArrayList<String>(Arrays.asList("In a medium bowl, beat eggs " +
                         "until no whites remain, then season with salt, pepper, and a pinch red pepper flakes",
                 "In a medium non-stick skillet over medium heat, melt butter. Pour in eggs and tilt pan so eggs fully cover the entire pan." +
@@ -63,5 +65,19 @@ class RecipeTest {
                         "Tilt pan to let uncooked egg fall to the edge of the pan. ", "Once the bottom is set, but top is still a little wet, " +
                         "sprinkle cheese and chives on one half of omelet. Fold other side over cheese and slide omelet onto a plate. "));
         assertEquals(expected, r1.getDirections());
+    }
+
+    @Test
+    void testToJson() {
+        JSONObject jsonObject = r1.toJson();
+        assertEquals(r1.getTitle(), jsonObject.get("title"));
+        assertEquals(r1.getServingSize(), jsonObject.get("serving size"));
+        JSONArray jsonArrayIngredients = jsonObject.getJSONArray("ingredients");
+        assertEquals(r1.getIngredients(), r1.getArrayListString(jsonArrayIngredients));
+        assertEquals(r1.getPrepTime(), jsonObject.get("prep time"));
+        assertEquals(r1.getCookTime(), jsonObject.get("cook time"));
+        JSONArray jsonArrayDirections = jsonObject.getJSONArray("directions");
+        assertEquals(r1.getDirections(), r1.getArrayListString(jsonArrayDirections));
+        assertEquals(r1.getRating(), jsonObject.get("rating"));
     }
 }

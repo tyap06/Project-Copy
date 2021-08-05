@@ -150,6 +150,9 @@ public class RecipeManagerApp {
         while (keepGoing) {
             ingredients.add(ingredient);
             ingredient = input.nextLine();
+            if (ingredient.equals(" ")) {
+                ingredient = input.nextLine();
+            }
             if (ingredient.equals("done")) {
                 keepGoing = false;
             }
@@ -161,6 +164,7 @@ public class RecipeManagerApp {
     private ArrayList<String> addDirections() {
         boolean keepGoing = true;
         ArrayList<String> directions = new ArrayList<>();
+
         String direction = input.nextLine();
 
         while (keepGoing) {

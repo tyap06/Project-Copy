@@ -70,7 +70,7 @@ public class WorkRoom implements Writable {
     }
 
     // EFFECTS: returns recipes in this workroom as a JSON array
-    private JSONArray recipesToJson() {
+    public JSONArray recipesToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Recipe r : recipes) {

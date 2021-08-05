@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -82,6 +83,15 @@ public class Recipe implements Writable {
         json.put("directions", directions);
         json.put("rating", rating);
         return json;
+    }
+
+    // EFFECTS: produce an array list of string from a JSON array
+    public ArrayList<String> getArrayListString(JSONArray jsonArray) {
+        ArrayList<String> stringArrayList = new ArrayList<String>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            stringArrayList.add(jsonArray.getString(i));
+        }
+        return stringArrayList;
     }
 
 }
