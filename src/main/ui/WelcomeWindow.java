@@ -111,28 +111,18 @@ public class WelcomeWindow extends JFrame {
         // EFFECTS: gets user input and makes a new recipe
         public void actionPerformed(ActionEvent e) {
             closeWindow();
-            String title = JOptionPane.showInputDialog(null,
-                    "Enter new recipe title",
-                    "Recipe title",
-                    JOptionPane.QUESTION_MESSAGE);
-            String servingSize = JOptionPane.showInputDialog(null,
-                    "Enter serving size",
-                    "Serving size",
-                    JOptionPane.QUESTION_MESSAGE);
+            String title = JOptionPane.showInputDialog(null, "Enter new recipe title",
+                    "Recipe title", JOptionPane.QUESTION_MESSAGE);
+            String servingSize = JOptionPane.showInputDialog(null, "Enter serving size",
+                    "Serving size", JOptionPane.QUESTION_MESSAGE);
             ArrayList<String> ingredients = getIngredients();
-            String prepTime = JOptionPane.showInputDialog(null,
-                    "Enter prep time",
-                    "Prep time",
-                    JOptionPane.QUESTION_MESSAGE);
-            String cookTime = JOptionPane.showInputDialog(null,
-                    "Enter cook time",
-                    "Cook time",
-                    JOptionPane.QUESTION_MESSAGE);
+            String prepTime = JOptionPane.showInputDialog(null, "Enter prep time in minutes",
+                    "Prep time", JOptionPane.QUESTION_MESSAGE);
+            String cookTime = JOptionPane.showInputDialog(null, "Enter cook time in minutes",
+                    "Cook time", JOptionPane.QUESTION_MESSAGE);
             ArrayList<String> directions = getDirections();
-            String rating = JOptionPane.showInputDialog(null,
-                    "Enter rating",
-                    "Rating",
-                    JOptionPane.QUESTION_MESSAGE);
+            String rating = JOptionPane.showInputDialog(null, "Enter rating",
+                    "Rating", JOptionPane.QUESTION_MESSAGE);
             Recipe newRecipe = new Recipe(title, Integer.parseInt(servingSize), ingredients,
                     Integer.parseInt(prepTime), Integer.parseInt(cookTime), directions, Integer.parseInt(rating));
             recipes = new RecipeCollection();

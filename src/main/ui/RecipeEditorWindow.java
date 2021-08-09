@@ -64,9 +64,20 @@ public class RecipeEditorWindow extends JFrame {
         doLoadWorkRoom();
         recipeDisplayPanel = new JPanel(new GridLayout(0, 1));
         for (Recipe recipe : workRoom.getRecipes()) {
-            JLabel label = new JLabel(recipe.getTitle());
-            recipeDisplayPanel.add(label);
-            recipeDisplayPanel.add(new JSeparator());
+            JLabel title = new JLabel(recipe.getTitle());
+            JLabel servingSize = new JLabel("Serving size: " + Integer.toString(recipe.getServingSize()));
+            JLabel ingredients = new JLabel("Ingredients: " + recipe.getIngredients());
+            JLabel prepTime = new JLabel("Prep time: " + Integer.toString(recipe.getPrepTime()));
+            JLabel cookTime = new JLabel("Cook time: " + Integer.toString(recipe.getCookTime()));
+            JLabel directions = new JLabel("Directions: " + recipe.getDirections());
+            JLabel rating = new JLabel("Rating: " + Integer.toString(recipe.getRating()));
+            recipeDisplayPanel.add(title);
+            recipeDisplayPanel.add(servingSize);
+            recipeDisplayPanel.add(ingredients);
+            recipeDisplayPanel.add(prepTime);
+            recipeDisplayPanel.add(cookTime);
+            recipeDisplayPanel.add(directions);
+            recipeDisplayPanel.add(rating);
         }
         add(recipeDisplayPanel, BorderLayout.CENTER);
     }
@@ -102,7 +113,7 @@ public class RecipeEditorWindow extends JFrame {
             jsonWriter.write(workRoom);
             jsonWriter.close();
             JOptionPane.showMessageDialog(null,
-                    "Saved recipe to " + JSON_STORE);
+                    "Saved recipe to " +  workRoom.getName());
             System.out.println("Saved " + workRoom.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null,
