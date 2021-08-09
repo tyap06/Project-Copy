@@ -196,7 +196,7 @@ public class RecipeManagerApp {
     }
 
     // EFFECTS: saves the recipe workroom to file
-    private void doSaveWorkRoom() {
+    public void doSaveWorkRoom() {
         try {
             jsonWriter.open();
             jsonWriter.write(workRoom);
@@ -209,7 +209,7 @@ public class RecipeManagerApp {
 
     // MODIFIES: this
     // EFFECTS: loads workroom from file
-    private void doLoadWorkRoom() {
+    public void doLoadWorkRoom() {
         try {
             JsonReader reader = new JsonReader(JSON_STORE);
             workRoom = reader.read();
