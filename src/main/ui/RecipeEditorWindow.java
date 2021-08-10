@@ -7,6 +7,7 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
@@ -19,7 +20,7 @@ public class RecipeEditorWindow extends JFrame {
     private RecipeCollection recipes;
     private WorkRoom workRoom;
 
-    private static final int WIDTH = 400;
+    private static final int WIDTH = 600;
     private static final int HEIGHT = 800;
 
     private JPanel recipeDisplayPanel;
@@ -71,6 +72,7 @@ public class RecipeEditorWindow extends JFrame {
             JLabel cookTime = new JLabel("Cook time: " + Integer.toString(recipe.getCookTime()));
             JLabel directions = new JLabel("Directions: " + recipe.getDirections());
             JLabel rating = new JLabel("Rating: " + Integer.toString(recipe.getRating()));
+            title.setFont(new Font(Font.DIALOG,Font.BOLD, 20));
             recipeDisplayPanel.add(title);
             recipeDisplayPanel.add(servingSize);
             recipeDisplayPanel.add(ingredients);
@@ -88,8 +90,8 @@ public class RecipeEditorWindow extends JFrame {
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(0, 1));
 
-
         addSaveButton();
+        addCloseButton();
 
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -103,6 +105,17 @@ public class RecipeEditorWindow extends JFrame {
         saveButton.setContentAreaFilled(true);
         saveButton.addActionListener(new SaveRecipeAction());
         buttonPanel.add(saveButton);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initializes close button and adds it to the button panel, allows user to go back to the welcome window
+    private void addCloseButton() {
+        JButton closeButton = new JButton("Close");
+        closeButton.setBorderPainted(true);
+        closeButton.setFocusPainted(true);
+        closeButton.setContentAreaFilled(true);
+        closeButton.addActionListener(new CloseAction());
+        buttonPanel.add(closeButton);
     }
 
 
@@ -134,11 +147,25 @@ public class RecipeEditorWindow extends JFrame {
         // MODIFIES: this
         // EFFECTS: gets user input for recipe and saves recipe
         public void actionPerformed(ActionEvent e) {
-            fileName = JOptionPane.showInputDialog(null,
-                    "Enter name of workroom:",
-                    "Save recipe",
-                    JOptionPane.QUESTION_MESSAGE);
             doSaveWorkRoom();
+        }
+
+    }
+
+    private class CloseAction extends AbstractAction {
+
+        // MODIFIES: this
+        // EFFECTS: constructs save recipe action
+        CloseAction() {
+            super("Close");
+        }
+
+
+        // MODIFIES: this
+        // EFFECTS: gets user input for recipe and saves recipe
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            WelcomeWindow launch = new WelcomeWindow();
         }
 
     }

@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 public class WelcomeWindow extends JFrame {
 
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 200;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 300;
 
     private Recipe recipe;
     private RecipeCollection recipes;
-    private WorkRoom workRoom;
+    private WorkRoom workRoom = new WorkRoom("Timothy's workroom");
     private String fileName;
 
     private static final String JSON_STORE = "./data/workroom.json";
@@ -54,12 +54,16 @@ public class WelcomeWindow extends JFrame {
         panel.setSize(new Dimension(0, 0));
         add(panel);
         JLabel label = new JLabel("Recipe Manager App");
-        label.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        label.setFont(new Font("Roboto", Font.PLAIN, 26));
         label.setHorizontalAlignment(0);
         panel.add(label);
         JPanel buttonPanel = new JPanel(new GridLayout(0, 2));
-        buttonPanel.add(new JButton(new MakeRecipeAction()));
-        buttonPanel.add(new JButton(new LoadRecipesAction()));
+        JButton makeRecipeButton = new JButton(new MakeRecipeAction());
+        makeRecipeButton.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+        JButton loadRecipeButton = new JButton(new LoadRecipesAction());
+        loadRecipeButton.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
+        buttonPanel.add(makeRecipeButton);
+        buttonPanel.add(loadRecipeButton);
         add(buttonPanel);
     }
 
@@ -126,7 +130,6 @@ public class WelcomeWindow extends JFrame {
             Recipe newRecipe = new Recipe(title, Integer.parseInt(servingSize), ingredients,
                     Integer.parseInt(prepTime), Integer.parseInt(cookTime), directions, Integer.parseInt(rating));
             recipes = new RecipeCollection();
-            workRoom = new WorkRoom("Timothy's workroom");
             workRoom.addRecipe(newRecipe);
             doSaveWorkRoom();
             makeNewRecipe(title, Integer.parseInt(servingSize), ingredients, Integer.parseInt(prepTime),
