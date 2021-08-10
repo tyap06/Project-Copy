@@ -19,7 +19,7 @@ public class WelcomeWindow extends JFrame {
     public static final int HEIGHT = 300;
 
     private Recipe recipe;
-    private RecipeCollection recipes;
+    private RecipeCollection recipes = new RecipeCollection();
     private WorkRoom workRoom = new WorkRoom("Timothy's workroom");
     private String fileName;
 
@@ -131,7 +131,6 @@ public class WelcomeWindow extends JFrame {
             Recipe newRecipe = new Recipe(title, Integer.parseInt(servingSize), ingredients,
                     Integer.parseInt(prepTime), Integer.parseInt(cookTime), directions, Integer.parseInt(rating));
             workRoom.addRecipe(newRecipe);
-            doSaveWorkRoom();
             makeNewRecipe(title, Integer.parseInt(servingSize), ingredients, Integer.parseInt(prepTime),
                     Integer.parseInt(cookTime), directions, Integer.parseInt(rating));
         }
@@ -177,39 +176,23 @@ public class WelcomeWindow extends JFrame {
         return directions;
     }
 
-    // EFFECTS: saves the recipe workroom to file
-    public void doSaveWorkRoom() {
-        try {
-            jsonWriter = new JsonWriter(JSON_STORE);
-            jsonWriter.open();
-            jsonWriter.write(workRoom);
-            jsonWriter.close();
-            System.out.println("Saved " + workRoom.getName() + " to " + JSON_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
-        }
-    }
-
-
     // loads recipes
     private class LoadRecipesAction extends AbstractAction {
 
         // MODIFIES: this
         // EFFECTS: initializes class name
         LoadRecipesAction() {
-            super("Load recipe");
+            super("Load recipes");
         }
 
         // MODIFIES: this
         public void actionPerformed(ActionEvent e) {
             closeWindow();
             String name = JOptionPane.showInputDialog(null,
-                    "Enter Recipe name:",
-                    "Load Recipe",
+                    "Enter Recipe collection name:",
+                    "Load Recipes",
                     JOptionPane.QUESTION_MESSAGE);
             loadRecipes(name);
         }
     }
-
-
 }
