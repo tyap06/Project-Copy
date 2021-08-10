@@ -24,6 +24,7 @@ public class WelcomeWindow extends JFrame {
     private String fileName;
 
     private static final String JSON_STORE = "./data/workroom.json";
+    private static final String NEW_JSON_STORE = "./data/";
     private JsonReader jsonReader;
     private JsonWriter jsonWriter;
 
@@ -79,9 +80,9 @@ public class WelcomeWindow extends JFrame {
     // MODIFIES: this
     // EFFECTS: loads recipes from file and displays it
     //        if recipe not found, restart
-    public void loadRecipes() {
+    public void loadRecipes(String name) {
         try {
-            JsonReader reader = new JsonReader(JSON_STORE);
+            JsonReader reader = new JsonReader(NEW_JSON_STORE + name + ".json");
             workRoom = reader.read();
             launchRecipeDisplayWindow();
         } catch (IOException e) {
@@ -92,7 +93,7 @@ public class WelcomeWindow extends JFrame {
     // MODIFIES: this
     // EFFECTS: closes current window and launches recipes to display
     public void launchRecipeDisplayWindow() {
-        RecipeEditorWindow recipeEditor = new RecipeEditorWindow(recipe, fileName);
+        RecipeEditorWindow recipeEditor = new RecipeEditorWindow(recipe, workRoom);
     }
 
     // MODIFIES: this
@@ -129,7 +130,6 @@ public class WelcomeWindow extends JFrame {
                     "Rating", JOptionPane.QUESTION_MESSAGE);
             Recipe newRecipe = new Recipe(title, Integer.parseInt(servingSize), ingredients,
                     Integer.parseInt(prepTime), Integer.parseInt(cookTime), directions, Integer.parseInt(rating));
-            recipes = new RecipeCollection();
             workRoom.addRecipe(newRecipe);
             doSaveWorkRoom();
             makeNewRecipe(title, Integer.parseInt(servingSize), ingredients, Integer.parseInt(prepTime),
@@ -197,17 +197,17 @@ public class WelcomeWindow extends JFrame {
         // MODIFIES: this
         // EFFECTS: initializes class name
         LoadRecipesAction() {
-            super("Load recipes");
+            super("Load recipe");
         }
 
         // MODIFIES: this
         public void actionPerformed(ActionEvent e) {
             closeWindow();
-            String title = JOptionPane.showInputDialog(null,
-                    "Enter workroom name:",
-                    "Load Recipes Workroom",
+            String name = JOptionPane.showInputDialog(null,
+                    "Enter Recipe name:",
+                    "Load Recipe",
                     JOptionPane.QUESTION_MESSAGE);
-            loadRecipes();
+            loadRecipes(name);
         }
     }
 

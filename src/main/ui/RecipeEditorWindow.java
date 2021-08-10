@@ -1,5 +1,6 @@
 package ui;
 
+import com.sun.corba.se.spi.orbutil.threadpool.Work;
 import model.Recipe;
 import model.RecipeCollection;
 import model.WorkRoom;
@@ -26,17 +27,18 @@ public class RecipeEditorWindow extends JFrame {
     private JPanel recipeDisplayPanel;
 
     private static final String JSON_STORE = "./data/workroom.json";
-    private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
-    private JsonReader jsonReader = new JsonReader(JSON_STORE);
+    private static final String NEW_JSON_STORE = "./data/";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
     private JPanel buttonPanel;
 
     // MODIFIES: this
     // EFFECTS: initializes recipe display panel
-    public RecipeEditorWindow(Recipe recipe, String fileName) {
+    public RecipeEditorWindow(Recipe recipe, WorkRoom workRoom) {
         super("Recipe Manager App");
 
         this.recipe = recipe;
-        this.fileName = fileName;
+        this.workRoom = workRoom;
 
         initializeRecipeGraphics(false);
 
@@ -122,12 +124,15 @@ public class RecipeEditorWindow extends JFrame {
     // EFFECTS: saves the recipe workroom to file
     public void doSaveWorkRoom() {
         try {
+            String name = JOptionPane.showInputDialog(null, "Enter name to save recipe: ",
+                    "Recipe Name", JOptionPane.QUESTION_MESSAGE);
+            jsonWriter = new JsonWriter(NEW_JSON_STORE + name + ".json");
             jsonWriter.open();
             jsonWriter.write(workRoom);
             jsonWriter.close();
             JOptionPane.showMessageDialog(null,
-                    "Saved recipe to " +  workRoom.getName());
-            System.out.println("Saved " + workRoom.getName() + " to " + JSON_STORE);
+                    "Saved recipe to " + NEW_JSON_STORE + name + ".json");
+            System.out.println("Saved recipe to " + NEW_JSON_STORE + name + ".json");
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null,
                     "Unable to write file: " + JSON_STORE);
@@ -174,7 +179,7 @@ public class RecipeEditorWindow extends JFrame {
     // EFFECTS: loads workroom from file
     public void doLoadWorkRoom() {
         try {
-            JsonReader reader = new JsonReader(JSON_STORE);
+            JsonReader reader = new JsonReader(NEW_JSON_STORE + workRoom.getName() + ".json");
             workRoom = reader.read();
             System.out.println("Loaded " + workRoom.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
