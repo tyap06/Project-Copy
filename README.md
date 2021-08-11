@@ -4,12 +4,12 @@
 
 **What will the application do?:**
 
-- My application will be able to keep track of recipes that are added. I will have different categories for each type of
-recipe, such as Breakfast, Lunch, Dinner, and Dessert. My app will also be able to sort and filter through recipes when 
-  a filter is set. Different cuisines could be filtered for, and my app will be able to find recipes that correspond to it.
-  Users will be able to add and delete recipes. When a recipe is added, users will have an option to upload a picture of the food.
-Users will also be able to rate the recipe based on a 5 star scale. When viewing a recipe, users can find the ingredients needed,
-  directions/steps to prepare the recipe, serving size, and nutrition facts.
+- My application will be able to keep track of recipes that are added. Users will be able to add and delete recipes. 
+  When a recipe is added, users will have an option to add more recipes or save their recipe collection. Users will also
+  be able to rate the recipe based on a 5 star scale. When viewing a recipe, users can find the recipe title, 
+  serving size, a list of ingredients, prep time, cook time, a list of directions to prepare the recipe, and a rating
+  of the recipe.
+  
   
 **Who will use it?**
 
@@ -29,4 +29,11 @@ Users can have all of their recipes stored in this app for easy access.
 - As a user, I want to be able to select a recipe and rate it on a scale of one to five stars.
 - As a user, I want to be able to save my recipe collection to file.
 - As a user, I want to be able to load my recipe collection from file.
+
+Phase 4: Task 2
+
+- I refactored my RecipeCollection class to be robust. I refactored my ViewTitles method so that when an empty list of 
+  recipes is given, it will throw an IsEmptyException. RecipeCollectionTest has also been updated to include test cases
+  where the expection is thrown and not thrown.
+
   

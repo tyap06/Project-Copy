@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.IsEmptyException;
+
 import java.util.*;
 
 // Represents a collection of recipes
@@ -31,9 +33,11 @@ public class RecipeCollection {
         return false;
     }
 
-    // REQUIRES: Recipes is not empty
     // EFFECTS: Takes a recipe collection and returns a list of recipe titles in the collection
-    public ArrayList<String> viewTitles() {
+    public ArrayList<String> viewTitles() throws IsEmptyException {
+        if (recipes.isEmpty()) {
+            throw new IsEmptyException("Recipes cannot be empty");
+        }
         ArrayList<String> titles = new ArrayList<String>();
         for (int i = 0; i <= (recipes.size() - 1); i++) {
             titles.add((recipes.get(i).getTitle()));
