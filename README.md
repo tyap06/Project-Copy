@@ -35,5 +35,15 @@ Phase 4: Task 2
 - I refactored my RecipeCollection class to be robust. I refactored my ViewTitles method so that when an empty list of 
   recipes is given, it will throw an IsEmptyException. RecipeCollectionTest has also been updated to include test cases
   where the expection is thrown and not thrown.
+  
+Phase 4: Task 3
+
+- Refactor WelcomeWindow and RecipeEditor because both classes use similar methods. 
+  - Maybe create another class for to represent the similarities in both classes, like the add recipe method in both classes.
+  
+- Refactor how recipes are saved and loaded in. Change the WorkRoom class name possibly.
+
+- Refactor my code to include RecipeCollection more because I rarely used this class in my GUI implementation.
+
 
   
